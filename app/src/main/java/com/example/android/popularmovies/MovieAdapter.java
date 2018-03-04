@@ -27,7 +27,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     @Override
     public MovieViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_layout, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.grid_item_layout, viewGroup, false);
         return new MovieViewHolder(view);
     }
 
@@ -36,6 +36,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
         movieViewHolder.tvOriginalTitle.setText(movies.get(i).getOriginal_title());
         Picasso.with(context).load("http://image.tmdb.org/t/p/" + "w185" + movies.get(i).getPoster_path()).into(movieViewHolder.ivMovie);
+        movieViewHolder.tvMovieId.setText(Integer.toString(movies.get(i).getId()));
+        movieViewHolder.tvMovieId.setVisibility(View.INVISIBLE);
+
+
     }
 
     @Override
@@ -44,6 +48,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     }
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
+        private final TextView tvMovieId;
         private TextView tvOriginalTitle;
         private ImageView ivMovie;
 
@@ -52,6 +57,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
             tvOriginalTitle = (TextView) view.findViewById(R.id.tv_original_title);
             ivMovie = (ImageView) view.findViewById(R.id.iv_movie);
+            tvMovieId = (TextView) view.findViewById(R.id.tv_movie_id);
         }
     }
 

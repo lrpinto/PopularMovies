@@ -6,6 +6,7 @@ package com.example.android.popularmovies;
 
 public class MovieModel {
 
+    private Integer id; // The movie ID
     private String original_title; // The original title
     private String poster_path; // The movie poster thumbnail
     private String release_date; // The release date
@@ -16,12 +17,12 @@ public class MovieModel {
         // constructor for serialization
     }
 
-    public MovieModel(String originalTitle, String posterPath, String releaseDate, String overview, Number voteAvg) {
-        this.original_title = originalTitle;
-        this.poster_path = posterPath;
-        this.release_date = releaseDate;
-        this.overview = overview;
-        this.vote_average = voteAvg;
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getOriginal_title() {

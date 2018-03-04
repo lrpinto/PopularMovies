@@ -1,7 +1,7 @@
 package com.example.android.popularmovies;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +9,7 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -63,7 +63,13 @@ public class MainActivity extends AppCompatActivity {
                 View child = rv.findChildViewUnder(e.getX(), e.getY());
                 if (child != null && gestureDetector.onTouchEvent(e)) {
                     int position = rv.getChildAdapterPosition(child);
-                    Toast.makeText(getApplicationContext(), movies.get(position).getOverview().toString(), Toast.LENGTH_LONG).show();
+
+                    TextView tvMovieId = (TextView) child.findViewById(R.id.tv_movie_id);
+
+                    Intent intentToStartDetailActivity = new Intent(getApplicationContext(), MovieActivity.class);
+                    intentToStartDetailActivity.putExtra(Intent.EXTRA_TEXT, tvMovieId.getText());
+                    startActivity(intentToStartDetailActivity);
+
                 }
 
                 return false;
