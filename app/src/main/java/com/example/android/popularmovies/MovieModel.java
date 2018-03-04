@@ -6,46 +6,46 @@ package com.example.android.popularmovies;
 
 public class MovieModel {
 
-    private String originalTitle; // The original title
-    private String posterPath; // The movie poster thumbnail
-    private String releaseDate; // The release date
+    private String original_title; // The original title
+    private String poster_path; // The movie poster thumbnail
+    private String release_date; // The release date
     private String overview; // The plot synopsis
-    private Number voteAvg; // The user rating
+    private Number vote_average; // The user rating
 
     public MovieModel() {
         // constructor for serialization
     }
 
     public MovieModel(String originalTitle, String posterPath, String releaseDate, String overview, Number voteAvg) {
-        this.originalTitle = originalTitle;
-        this.posterPath = posterPath;
-        this.releaseDate = releaseDate;
+        this.original_title = originalTitle;
+        this.poster_path = posterPath;
+        this.release_date = releaseDate;
         this.overview = overview;
-        this.voteAvg = voteAvg;
+        this.vote_average = voteAvg;
     }
 
-    public String getOriginalTitle() {
-        return originalTitle;
+    public String getOriginal_title() {
+        return original_title;
     }
 
-    public void setOriginalTitle(String originalTitle) {
-        this.originalTitle = originalTitle;
+    public void setOriginal_title(String original_title) {
+        this.original_title = original_title;
     }
 
-    public String getPosterPath() {
-        return posterPath;
+    public String getPoster_path() {
+        return poster_path;
     }
 
-    public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
+    public void setPoster_path(String poster_path) {
+        this.poster_path = poster_path;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
+    public String getRelease_date() {
+        return release_date;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setRelease_date(String release_date) {
+        this.release_date = release_date;
     }
 
     public String getOverview() {
@@ -56,11 +56,11 @@ public class MovieModel {
         this.overview = overview;
     }
 
-    public Number getVoteAvg() {
-        return voteAvg;
+    public Number getVote_average() {
+        return vote_average;
     }
 
-    public void setVoteAvg(Number voteAvg) {
-        this.voteAvg = voteAvg;
+    public void setVote_average(Number vote_average) {
+        this.vote_average = vote_average;
     }
 }

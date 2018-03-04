@@ -34,8 +34,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     @Override
     public void onBindViewHolder(MovieViewHolder movieViewHolder, int i) {
 
-        movieViewHolder.tvOriginalTitle.setText(movies.get(i).getOriginalTitle());
-        Picasso.with(context).load(movies.get(i).getPosterPath()).into(movieViewHolder.ivMovie);
+        movieViewHolder.tvOriginalTitle.setText(movies.get(i).getOriginal_title());
+        Picasso.with(context).load("http://image.tmdb.org/t/p/" + "w185" + movies.get(i).getPoster_path()).into(movieViewHolder.ivMovie);
     }
 
     @Override
