@@ -1,4 +1,4 @@
-package com.example.android.popularmovies;
+package com.example.android.popularmovies.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.android.popularmovies.R;
+import com.example.android.popularmovies.data.MovieModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -37,9 +39,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         movieViewHolder.tvOriginalTitle.setText(movies.get(i).getOriginal_title());
         Picasso.with(context).load("http://image.tmdb.org/t/p/" + "w185" + movies.get(i).getPoster_path()).into(movieViewHolder.ivMovie);
         movieViewHolder.tvMovieId.setText(Integer.toString(movies.get(i).getId()));
-        movieViewHolder.tvMovieId.setVisibility(View.INVISIBLE);
-
-
     }
 
     @Override
