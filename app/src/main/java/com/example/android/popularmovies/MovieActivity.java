@@ -23,11 +23,11 @@ public class MovieActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.movie_activity);
 
-        ivMoviePoster = (ImageView) findViewById(R.id.iv_movie);
-        tvOriginalTitle = (TextView) findViewById(R.id.tv_original_title);
-        tvReleaseDate = (TextView) findViewById(R.id.tv_release_date);
-        tvVoteAverage = (TextView) findViewById(R.id.tv_vote_average);
-        tvOverview = (TextView) findViewById(R.id.tv_overview);
+        ivMoviePoster = findViewById(R.id.iv_movie);
+        tvOriginalTitle = findViewById(R.id.tv_original_title);
+        tvReleaseDate = findViewById(R.id.tv_release_date);
+        tvVoteAverage = findViewById(R.id.tv_vote_average);
+        tvOverview = findViewById(R.id.tv_overview);
 
         Intent intentThatStartedThisActivity = getIntent();
 
@@ -35,11 +35,13 @@ public class MovieActivity extends AppCompatActivity {
             if (intentThatStartedThisActivity.hasExtra("MOVIE")) {
                 MovieModel movie = intentThatStartedThisActivity.getParcelableExtra("MOVIE");
 
-                Picasso.with(getApplicationContext()).load("http://image.tmdb.org/t/p/" + "w185" + movie.getPoster_path()).into(ivMoviePoster);
+                Picasso.with(getApplicationContext())
+                        .load("http://image.tmdb.org/t/p/" + "w185" + movie.getPoster_path())
+                        .into(ivMoviePoster);
 
                 tvOriginalTitle.setText(movie.getOriginal_title());
                 tvReleaseDate.setText(movie.getRelease_date());
-                tvVoteAverage.setText(movie.getVote_average().toString());
+                tvVoteAverage.setText(Double.toString( movie.getVote_average() ));
                 tvOverview.setText(movie.getOverview());
 
             }

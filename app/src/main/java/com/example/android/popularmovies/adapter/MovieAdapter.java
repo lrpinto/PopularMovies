@@ -15,7 +15,10 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 /**
+ * MovieAdapter.java
  * Created by Luisa on 04/03/2018.
+ *
+ * Adapter to manage grid item views displayed in the recycler view.
  */
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
@@ -36,9 +39,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     @Override
     public void onBindViewHolder(MovieViewHolder movieViewHolder, int i) {
 
-        movieViewHolder.tvOriginalTitle.setText(movies.get(i).getOriginal_title());
         Picasso.with(context).load("http://image.tmdb.org/t/p/" + "w185" + movies.get(i).getPoster_path()).into(movieViewHolder.ivMovie);
-        movieViewHolder.tvMovieId.setText(Integer.toString(movies.get(i).getId()));
+
     }
 
     @Override
@@ -46,17 +48,17 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         return movies.size();
     }
 
-    public class MovieViewHolder extends RecyclerView.ViewHolder {
-        private final TextView tvMovieId;
+    class MovieViewHolder extends RecyclerView.ViewHolder {
+
         private TextView tvOriginalTitle;
         private ImageView ivMovie;
 
-        public MovieViewHolder(View view) {
+        MovieViewHolder(View view) {
             super(view);
 
-            tvOriginalTitle = (TextView) view.findViewById(R.id.tv_original_title);
-            ivMovie = (ImageView) view.findViewById(R.id.iv_movie);
-            tvMovieId = (TextView) view.findViewById(R.id.tv_movie_id);
+            tvOriginalTitle = view.findViewById(R.id.tv_original_title);
+            ivMovie = view.findViewById(R.id.iv_movie);
+
         }
     }
 

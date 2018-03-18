@@ -1,32 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ImageView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/iv_movie"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorPrimary"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/tv_movie_id"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="0"
-        android:visibility="invisible" />
-
-    <ImageView
-        android:id="@+id/iv_movie"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true" />
-
-    <TextView
-        android:id="@+id/tv_original_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/colorPrimary"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold" />
-
-
-</LinearLayout>
+    android:layout_height="250dp"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentEnd="true"
+    android:scaleType="centerCrop"
+    android:contentDescription="@string/poster_cd"/>
