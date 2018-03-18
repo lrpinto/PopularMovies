@@ -4,7 +4,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
+ * MovieModel.java
  * Created by Luisa on 04/03/2018.
+ *
+ * Class that represents a movie object.
  */
 
 public class MovieModel implements Parcelable {
@@ -21,7 +24,8 @@ public class MovieModel implements Parcelable {
 
     private Integer id; // The movie ID
     private String original_title; // The original title
-    private String poster_path; // The movie poster thumbnail
+    private String poster_path; // The movie poster (portrait)
+    private String backdrop_path; // The movie poster (landscape)
     private String release_date; // The release date
     private String overview; // The plot synopsis
     private Double vote_average; // The user rating
@@ -30,10 +34,11 @@ public class MovieModel implements Parcelable {
         // constructor for serialization
     }
 
-    public MovieModel(Integer id, String original_title, String poster_path, String release_date, String overview, Double vote_average) {
+    private MovieModel(Integer id, String original_title, String poster_path, String backdrop_path, String release_date, String overview, Double vote_average) {
         this.id = id;
         this.original_title = original_title;
         this.poster_path = poster_path;
+        this.backdrop_path = backdrop_path;
         this.release_date = release_date;
         this.overview = overview;
         this.vote_average = vote_average;
@@ -43,11 +48,12 @@ public class MovieModel implements Parcelable {
         Integer id = parcel.readInt();
         String originalTitle = parcel.readString();
         String posterPath = parcel.readString();
+        String backdropPath = parcel.readString();
         String releaseDate = parcel.readString();
         String overview = parcel.readString();
         Double voteAverage = parcel.readDouble();
 
-        return new MovieModel(id, originalTitle, posterPath, releaseDate, overview, voteAverage);
+        return new MovieModel(id, originalTitle, posterPath, backdropPath, releaseDate, overview, voteAverage);
     }
 
     public Integer getId() {
@@ -72,6 +78,14 @@ public class MovieModel implements Parcelable {
 
     public void setPoster_path(String poster_path) {
         this.poster_path = poster_path;
+    }
+
+    public String getBackdrop_path() {
+        return backdrop_path;
+    }
+
+    public void setBackdrop_path(String backdrop_path) {
+        this.backdrop_path = backdrop_path;
     }
 
     public String getRelease_date() {
@@ -108,6 +122,7 @@ public class MovieModel implements Parcelable {
         parcel.writeInt(id);
         parcel.writeString(original_title);
         parcel.writeString(poster_path);
+        parcel.writeString(backdrop_path);
         parcel.writeString(release_date);
         parcel.writeString(overview);
         parcel.writeDouble(vote_average);
@@ -120,6 +135,7 @@ public class MovieModel implements Parcelable {
                 "id=" + id +
                 ", original_title='" + original_title + '\'' +
                 ", poster_path='" + poster_path + '\'' +
+                ", backdrop_path='" + backdrop_path + '\'' +
                 ", release_date='" + release_date + '\'' +
                 ", overview='" + overview + '\'' +
                 ", vote_average=" + vote_average +
@@ -136,9 +152,9 @@ public class MovieModel implements Parcelable {
         if (!id.equals(that.id)) return false;
         if (!original_title.equals(that.original_title)) return false;
         if (!poster_path.equals(that.poster_path)) return false;
+        if (!backdrop_path.equals(that.backdrop_path)) return false;
         if (!release_date.equals(that.release_date)) return false;
-        if (!overview.equals(that.overview)) return false;
-        return vote_average.equals(that.vote_average);
+        return overview.equals(that.overview) && vote_average.equals(that.vote_average);
     }
 
     @Override
@@ -146,6 +162,7 @@ public class MovieModel implements Parcelable {
         int result = id.hashCode();
         result = 31 * result + original_title.hashCode();
         result = 31 * result + poster_path.hashCode();
+        result = 31 * result + backdrop_path.hashCode();
         result = 31 * result + release_date.hashCode();
         result = 31 * result + overview.hashCode();
         result = 31 * result + vote_average.hashCode();
