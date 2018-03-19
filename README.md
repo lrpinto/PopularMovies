@@ -4,7 +4,7 @@ Android app that displays top rated and popular movies.
 
 # Overview
 
-The app launchs a movie grid displaying movie poster thumbnails.  These can be sorted by the top rated or most popular. Sorting is available by use of two tabs or swiping. Movies are fecthed from TheMovieAPI. On clicking a movie poster the app opens a movie detail view displaying more details about the movie, such as the title, the synopsis, the rating and the release date.
+The app launchs a movie grid displaying movie poster thumbnails.  These can be sorted by the top rated or most popular. Sorting is available by use of two tabs or swiping. Movies are fetched from TheMovieAPI. On clicking a movie poster the app opens a movie detail view displaying more details about the movie, such as the title, the synopsis, the rating and the release date.
 
 # Usage
 
