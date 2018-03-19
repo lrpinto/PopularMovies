@@ -53,19 +53,19 @@ public class PopularFragment extends Fragment {
 
         popularView = inflater.inflate(R.layout.fragment_popular, container, false);
 
-        initViews();
+        loadViews();
 
         return popularView;
     }
 
-    private void initViews() {
+    private void loadViews() {
         recyclerView = (RecyclerView) popularView.findViewById(R.id.card_recycler_view);
         recyclerView.setHasFixedSize(true);
 
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 2);
         recyclerView.setLayoutManager(layoutManager);
 
-        initMovies();
+        loadMovies();
 
         recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             GestureDetector gestureDetector = new GestureDetector(getActivity().getApplicationContext(), new GestureDetector.SimpleOnGestureListener() {
@@ -108,7 +108,7 @@ public class PopularFragment extends Fragment {
 
     }
 
-    private void initMovies() {
+    private void loadMovies() {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://api.themoviedb.org/3/")
