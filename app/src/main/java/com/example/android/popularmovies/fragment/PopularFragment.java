@@ -68,7 +68,7 @@ public class PopularFragment extends Fragment {
         loadMovies();
 
         recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            GestureDetector gestureDetector = new GestureDetector(getActivity().getApplicationContext(), new GestureDetector.SimpleOnGestureListener() {
+            final GestureDetector gestureDetector = new GestureDetector(getActivity().getApplicationContext(), new GestureDetector.SimpleOnGestureListener() {
 
                 @Override
                 public boolean onSingleTapUp(MotionEvent e) {

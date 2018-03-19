@@ -10,16 +10,11 @@ import com.example.android.popularmovies.adapter.ViewPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ViewPager mViewPager;
-    private Toolbar mToolbar;
-    private ViewPagerAdapter mViewPagerAdapter;
-    private TabLayout mTabLayout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
         setViewPager();
@@ -28,11 +23,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void setViewPager() {
 
-        mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
+        ViewPagerAdapter mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mViewPagerAdapter);
 
-        mTabLayout = (TabLayout) findViewById(R.id.tab);
+        TabLayout mTabLayout = (TabLayout) findViewById(R.id.tab);
         mTabLayout.setupWithViewPager(mViewPager);
     }
 }

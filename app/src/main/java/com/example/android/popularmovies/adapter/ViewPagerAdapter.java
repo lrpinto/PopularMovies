@@ -14,8 +14,6 @@ import com.example.android.popularmovies.fragment.TopRatedFragment;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
-    private static int TAB_COUNT = 2;
-
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
     }
@@ -34,7 +32,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return TAB_COUNT;
+        return 2;
     }
 
     @Override

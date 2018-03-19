@@ -22,8 +22,8 @@ import java.util.ArrayList;
  */
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
-    private ArrayList<MovieModel> movies;
-    private Context context;
+    private final ArrayList<MovieModel> movies;
+    private final Context context;
 
     public MovieAdapter(Context context, ArrayList<MovieModel> movies) {
         this.movies = movies;
@@ -50,8 +50,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     class MovieViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tvOriginalTitle;
-        private ImageView ivMovie;
+        private final TextView tvOriginalTitle;
+        private final ImageView ivMovie;
 
         MovieViewHolder(View view) {
             super(view);
