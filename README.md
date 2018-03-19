@@ -14,4 +14,4 @@ The app launchs a movie grid displaying movie poster thumbnails.  These can be s
 
 # Aknowledgements
 
-This app was developed to meet specification of a project assigment for the [Android Developer Nanodegree Program](https://eu.udacity.com/course/android-developer-nanodegree-by-google--nd801) covering three main tasks (1) Design UI layouts for multiple Activities; (2) Start these Activities via Intent; (3) Display movies data fetched TheMovieDB API.
+This app was developed to meet specification of a project assigment for the [Android Developer Nanodegree Program](https://eu.udacity.com/course/android-developer-nanodegree-by-google--nd801) covering three main tasks: (1) Design UI layouts for multiple Activities; (2) Start these Activities via Intent; (3) Display movies data fetched TheMovieDB API.
