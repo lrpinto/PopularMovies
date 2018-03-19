@@ -26,7 +26,7 @@ public class MovieActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.movie_activity);
+        setContentView(R.layout.activity_movie);
 
         ivMoviePoster = findViewById(R.id.iv_movie);
         tvOriginalTitle = findViewById(R.id.tv_original_title);
@@ -35,6 +35,10 @@ public class MovieActivity extends AppCompatActivity {
         tvOverview = findViewById(R.id.tv_overview);
         rbMovieRating = findViewById(R.id.rb_movie_rating);
 
+        setMovieDetails();
+    }
+
+    private void setMovieDetails() {
         Intent intentThatStartedThisActivity = getIntent();
 
         if (intentThatStartedThisActivity != null) {
