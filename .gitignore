@@ -73,7 +73,7 @@ fastlane/test_output
 fastlane/readme.md
 
 # classpath, project, settings and config
-project
+.project
 .settings/
 app/.classpath
 app/.project
