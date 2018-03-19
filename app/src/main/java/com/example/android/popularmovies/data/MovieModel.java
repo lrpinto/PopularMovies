@@ -6,7 +6,7 @@ import android.os.Parcelable;
 /**
  * MovieModel.java
  * Created by Luisa on 04/03/2018.
- *
+ * <p>
  * Class that represents a movie object.
  */
 
@@ -149,12 +149,13 @@ public class MovieModel implements Parcelable {
 
         MovieModel that = (MovieModel) o;
 
-        if (!id.equals(that.id)) return false;
-        if (!original_title.equals(that.original_title)) return false;
-        if (!poster_path.equals(that.poster_path)) return false;
-        if (!backdrop_path.equals(that.backdrop_path)) return false;
-        if (!release_date.equals(that.release_date)) return false;
-        return overview.equals(that.overview) && vote_average.equals(that.vote_average);
+        return id.equals(that.id) &&
+                original_title.equals(that.original_title) &&
+                poster_path.equals(that.poster_path) &&
+                backdrop_path.equals(that.backdrop_path) &&
+                release_date.equals(that.release_date) &&
+                overview.equals(that.overview) &&
+                vote_average.equals(that.vote_average);
     }
 
     @Override

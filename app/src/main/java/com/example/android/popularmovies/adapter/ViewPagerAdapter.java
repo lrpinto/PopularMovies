@@ -9,7 +9,10 @@ import com.example.android.popularmovies.fragment.TopRatedFragment;
 
 
 /**
+ * ViewPagerAdapter.java
  * Created by Luisa on 03/03/2018.
+ * <p>
+ * View pager to manage changes between tabs.
  */
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {

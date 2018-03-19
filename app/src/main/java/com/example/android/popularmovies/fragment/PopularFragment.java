@@ -30,7 +30,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
+ * PopularFragment.java
  * Created by Luisa on 03/03/2018.
+ * <p>
+ * Fragment representing the content for the tab "Popular Movies".
  */
 
 public class PopularFragment extends Fragment {
@@ -59,7 +62,7 @@ public class PopularFragment extends Fragment {
     }
 
     private void loadViews() {
-        recyclerView = (RecyclerView) popularView.findViewById(R.id.card_recycler_view);
+        recyclerView = popularView.findViewById(R.id.card_recycler_view);
         recyclerView.setHasFixedSize(true);
 
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 2);

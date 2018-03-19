@@ -17,7 +17,7 @@ import java.util.ArrayList;
 /**
  * MovieAdapter.java
  * Created by Luisa on 04/03/2018.
- *
+ * <p>
  * Adapter to manage grid item views displayed in the recycler view.
  */
 

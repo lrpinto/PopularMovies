@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
         setViewPager();
@@ -23,11 +23,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void setViewPager() {
 
-        ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
+        ViewPager mViewPager = findViewById(R.id.pager);
         ViewPagerAdapter mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mViewPagerAdapter);
 
-        TabLayout mTabLayout = (TabLayout) findViewById(R.id.tab);
+        TabLayout mTabLayout = findViewById(R.id.tab);
         mTabLayout.setupWithViewPager(mViewPager);
     }
 }

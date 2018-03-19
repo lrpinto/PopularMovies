@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="EntryPointsManager">
+    <entry_points version="2.0">
+      <entry_point TYPE="field" FQNAME="com.example.android.popularmovies.network.JSONResponse results" />
+      <entry_point TYPE="field" FQNAME="com.example.android.popularmovies.adapter.MovieAdapter.MovieViewHolder tvOriginalTitle" />
+      <entry_point TYPE="field" FQNAME="com.example.android.popularmovies.data.MovieModel CREATOR" />
+    </entry_points>
+    <pattern value="com.example.android.popularmovies.data.MovieModel" method="setVote_average" />
+    <pattern value="com.example.android.popularmovies.data.MovieModel" method="setOverview" />
+    <pattern value="com.example.android.popularmovies.data.MovieModel" method="setRelease_date" />
+    <pattern value="com.example.android.popularmovies.data.MovieModel" method="setBackdrop_path" />
+    <pattern value="com.example.android.popularmovies.data.MovieModel" method="setPoster_path" />
+    <pattern value="com.example.android.popularmovies.data.MovieModel" method="setOriginal_title" />
+    <pattern value="com.example.android.popularmovies.data.MovieModel" method="setId" />
+    <pattern value="com.example.android.popularmovies.data.MovieModel" method="getId" />
+    <pattern value="com.example.android.popularmovies.data.MovieModel" method="MovieModel" />
+    <pattern value="com.example.android.popularmovies.data.MovieModel" />
+  </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="android.support.annotation.Nullable" />
     <option name="myDefaultNotNull" value="android.support.annotation.NonNull" />
