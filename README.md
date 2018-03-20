@@ -20,6 +20,6 @@ This app was developed to meet specification of a project assigment for the [And
 # Notes
 
 *In order to get an API key for TheMovieDB API:
-- Create an account at https://www.themoviedb.org/account/signup
+- Create an account at https://www.themoviedb.org/account/signup.
 - Go to your account settings and click the "API" link on the left sidebar.
-- For more details please see the [API FAQ](https://www.themoviedb.org/faq/api)
+- For more details please see the [API FAQ](https://www.themoviedb.org/faq/api).
