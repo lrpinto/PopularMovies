@@ -17,7 +17,9 @@ The app launchs a movie grid displaying movie poster thumbnails.  These can be s
 This app was developed to meet specification of a project assigment for the [Android Developer Nanodegree Program](https://eu.udacity.com/course/android-developer-nanodegree-by-google--nd801) covering three main tasks: (1) Design UI layouts for multiple Activities; (2) Start these Activities via Intent; (3) Display movies data fetched TheMovieDB API.
 
 
-** In order to get an API for TheMovieDB API:
+
+
+*In order to get an API for TheMovieDB API:
 - Create an account at https://www.themoviedb.org/account/signup
 - Go to your account settings and click the "API" link on the left sidebar.
 - For more details please see the [API FAQ](https://www.themoviedb.org/faq/api)
