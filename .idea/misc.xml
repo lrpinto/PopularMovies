@@ -1,32 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="EntryPointsManager">
-    <entry_points version="2.0">
-      <entry_point TYPE="field" FQNAME="com.example.android.popularmovies.network.JSONResponse results" />
-      <entry_point TYPE="field" FQNAME="com.example.android.popularmovies.adapter.MovieAdapter.MovieViewHolder tvOriginalTitle" />
-      <entry_point TYPE="field" FQNAME="com.example.android.popularmovies.data.MovieModel CREATOR" />
-    </entry_points>
-    <pattern value="com.example.android.popularmovies.data.MovieModel" method="setVote_average" />
-    <pattern value="com.example.android.popularmovies.data.MovieModel" method="setOverview" />
-    <pattern value="com.example.android.popularmovies.data.MovieModel" method="setRelease_date" />
-    <pattern value="com.example.android.popularmovies.data.MovieModel" method="setBackdrop_path" />
-    <pattern value="com.example.android.popularmovies.data.MovieModel" method="setPoster_path" />
-    <pattern value="com.example.android.popularmovies.data.MovieModel" method="setOriginal_title" />
-    <pattern value="com.example.android.popularmovies.data.MovieModel" method="setId" />
-    <pattern value="com.example.android.popularmovies.data.MovieModel" method="getId" />
-    <pattern value="com.example.android.popularmovies.data.MovieModel" method="MovieModel" />
-    <pattern value="com.example.android.popularmovies.data.MovieModel" />
-  </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="android.support.annotation.Nullable" />
     <option name="myDefaultNotNull" value="android.support.annotation.NonNull" />
     <option name="myNullables">
       <value>
-        <list size="4">
+        <list size="5">
           <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.Nullable" />
           <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nullable" />
-          <item index="2" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.Nullable" />
-          <item index="3" class="java.lang.String" itemvalue="android.support.annotation.Nullable" />
+          <item index="2" class="java.lang.String" itemvalue="javax.annotation.CheckForNull" />
+          <item index="3" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.Nullable" />
+          <item index="4" class="java.lang.String" itemvalue="android.support.annotation.Nullable" />
         </list>
       </value>
     </option>
@@ -41,26 +25,10 @@
       </value>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
   </component>
 </project>

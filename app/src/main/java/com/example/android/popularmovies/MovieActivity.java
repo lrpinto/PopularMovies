@@ -1,16 +1,22 @@
 package com.example.android.popularmovies;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.android.popularmovies.adapter.ViewPagerAdapter;
+import com.example.android.popularmovies.data.FavouriteMoviesContract;
 import com.example.android.popularmovies.data.MovieModel;
+import com.example.android.popularmovies.fragment.FavouritesFragment;
 import com.squareup.picasso.Picasso;
 
 public class MovieActivity extends AppCompatActivity {
@@ -21,6 +27,7 @@ public class MovieActivity extends AppCompatActivity {
     private TextView tvVoteAverage;
     private TextView tvOverview;
     private RatingBar rbMovieRating;
+    private Button btnFavourite;
 
 
     @Override
@@ -34,6 +41,7 @@ public class MovieActivity extends AppCompatActivity {
         tvVoteAverage = findViewById(R.id.tv_vote_average);
         tvOverview = findViewById(R.id.tv_overview);
         rbMovieRating = findViewById(R.id.rb_movie_rating);
+        btnFavourite = findViewById(R.id.btn_favourite);
 
         setMovieDetails();
     }
@@ -43,7 +51,7 @@ public class MovieActivity extends AppCompatActivity {
 
         if (intentThatStartedThisActivity != null) {
             if (intentThatStartedThisActivity.hasExtra("MOVIE")) {
-                MovieModel movie = intentThatStartedThisActivity.getParcelableExtra("MOVIE");
+                final MovieModel movie = intentThatStartedThisActivity.getParcelableExtra("MOVIE");
 
                 Picasso.with(getApplicationContext())
                         .load("http://image.tmdb.org/t/p/" + "w300" + movie.getBackdrop_path())
@@ -58,6 +66,13 @@ public class MovieActivity extends AppCompatActivity {
                 LayerDrawable stars = (LayerDrawable) rbMovieRating.getProgressDrawable();
                 stars.getDrawable(0).setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
                 stars.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
+
+                btnFavourite.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        FavouritesFragment.addFavouriteMovie(movie);
+                        ViewPagerAdapter.reloadFavouriteMovies(getApplicationContext());
+                    }
+                });
 
             }
         }

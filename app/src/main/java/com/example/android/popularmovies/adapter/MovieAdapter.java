@@ -22,7 +22,7 @@ import java.util.ArrayList;
  */
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
-    private final ArrayList<MovieModel> movies;
+    private ArrayList<MovieModel> movies;
     private final Context context;
 
     public MovieAdapter(Context context, ArrayList<MovieModel> movies) {
@@ -46,6 +46,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     @Override
     public int getItemCount() {
         return movies.size();
+    }
+
+    public void setMovies(ArrayList<MovieModel> movies) {
+        this.movies = movies;
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder {
