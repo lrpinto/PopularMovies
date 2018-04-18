@@ -15,12 +15,15 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.android.popularmovies.adapter.ReviewAdapter;
 import com.example.android.popularmovies.adapter.VideoAdapter;
 import com.example.android.popularmovies.adapter.ViewPagerAdapter;
 import com.example.android.popularmovies.data.MovieModel;
+import com.example.android.popularmovies.data.ReviewModel;
 import com.example.android.popularmovies.data.VideoModel;
 import com.example.android.popularmovies.fragment.FavouritesFragment;
 import com.example.android.popularmovies.network.RequestInterface;
+import com.example.android.popularmovies.network.ReviewsJSONResponse;
 import com.example.android.popularmovies.network.VideosJSONResponse;
 import com.squareup.picasso.Picasso;
 
@@ -44,9 +47,13 @@ public class MovieActivity extends AppCompatActivity {
     private RatingBar rbMovieRating;
     private Button btnFavourite;
 
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerViewVideos;
     private LinkedList<VideoModel> videos;
     private VideoAdapter videoAdapter;
+
+    private RecyclerView recyclerViewReviews;
+    private LinkedList<ReviewModel> reviews;
+    private ReviewAdapter reviewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +68,13 @@ public class MovieActivity extends AppCompatActivity {
         rbMovieRating = findViewById(R.id.rb_movie_rating);
         btnFavourite = findViewById(R.id.btn_favourite);
 
-        recyclerView = findViewById(R.id.card_recycler_view);
-        recyclerView.setHasFixedSize(true);
+        recyclerViewVideos = findViewById(R.id.card_recycler_view_videos);
+        recyclerViewVideos.setHasFixedSize(true);
+        recyclerViewVideos.setLayoutManager(new LinearLayoutManager(this));
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerViewReviews = findViewById(R.id.card_recycler_view_reviews);
+        recyclerViewReviews.setHasFixedSize(true);
+        recyclerViewReviews.setLayoutManager(new LinearLayoutManager(this));
 
         setMovieDetails();
 
@@ -100,6 +109,7 @@ public class MovieActivity extends AppCompatActivity {
                 });
 
                 loadTrailers(movie.getId());
+                loadReviews(movie.getId());
 
             }
         }
@@ -114,7 +124,7 @@ public class MovieActivity extends AppCompatActivity {
 
         RequestInterface request = retrofit.create(RequestInterface.class);
 
-        Call<VideosJSONResponse> call = request.getMovieVideos(movieId);
+        Call<VideosJSONResponse> call = request.getMovieVideos(movieId, MainActivity.API_KEY);
         call.enqueue(new Callback<VideosJSONResponse>() {
             @Override
             public void onResponse(Call<VideosJSONResponse> call, Response<VideosJSONResponse> response) {
@@ -134,11 +144,41 @@ public class MovieActivity extends AppCompatActivity {
                 }
 
                 videoAdapter = new VideoAdapter(getApplicationContext(), videos);
-                recyclerView.setAdapter(videoAdapter);
+                recyclerViewVideos.setAdapter(videoAdapter);
             }
 
             @Override
             public void onFailure(Call<VideosJSONResponse> call, Throwable t) {
+                Log.d("Error", t.getMessage());
+            }
+        });
+    }
+
+
+    private void loadReviews(Integer movieId) {
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://api.themoviedb.org/3/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        RequestInterface request = retrofit.create(RequestInterface.class);
+
+        Call<ReviewsJSONResponse> call = request.getMovieReviews(movieId, MainActivity.API_KEY);
+        call.enqueue(new Callback<ReviewsJSONResponse>() {
+            @Override
+            public void onResponse(Call<ReviewsJSONResponse> call, Response<ReviewsJSONResponse> response) {
+
+                ReviewsJSONResponse jsonResponse = response.body();
+
+                reviews = new LinkedList<>(Arrays.asList(jsonResponse.getReviews()));
+
+                reviewAdapter = new ReviewAdapter(getApplicationContext(), reviews);
+                recyclerViewReviews.setAdapter(reviewAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<ReviewsJSONResponse> call, Throwable t) {
                 Log.d("Error", t.getMessage());
             }
         });

@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.android.popularmovies.MainActivity;
 import com.example.android.popularmovies.MovieActivity;
 import com.example.android.popularmovies.R;
 import com.example.android.popularmovies.adapter.MovieAdapter;
@@ -122,7 +123,7 @@ public class TopRatedFragment extends Fragment {
 
         RequestInterface request = retrofit.create(RequestInterface.class);
 
-        Call<MoviesJSONResponse> call = request.getTopRatedMovies();
+        Call<MoviesJSONResponse> call = request.getTopRatedMovies(MainActivity.API_KEY);
         call.enqueue(new Callback<MoviesJSONResponse>() {
             @Override
             public void onResponse(Call<MoviesJSONResponse> call, Response<MoviesJSONResponse> response) {

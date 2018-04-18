@@ -5,22 +5,22 @@
     android:orientation="horizontal">
 
     <Button
-        android:id="@+id/btn_play"
+        android:id="@+id/btn_read"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_play"
-        android:textColor="@android:color/white"
         android:layout_marginTop="8dp"
+        android:text="@string/btn_read"
+        android:textColor="@android:color/white"
         android:textSize="14sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/tv_name"
+        android:id="@+id/tv_blob"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
         android:ellipsize="end"
         android:maxLines="2"
+        android:textColor="@android:color/white"
         android:textSize="14sp" />
 
 </LinearLayout>
