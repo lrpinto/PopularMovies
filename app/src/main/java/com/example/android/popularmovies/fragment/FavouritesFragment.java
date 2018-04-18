@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -23,17 +22,8 @@ import com.example.android.popularmovies.adapter.MovieAdapter;
 import com.example.android.popularmovies.data.FavouriteMoviesContract;
 import com.example.android.popularmovies.data.FavouriteMoviesDbHelper;
 import com.example.android.popularmovies.data.MovieModel;
-import com.example.android.popularmovies.network.JSONResponse;
-import com.example.android.popularmovies.network.RequestInterface;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * TopRatedFragment.java
@@ -58,7 +48,7 @@ public class FavouritesFragment extends Fragment {
         return new FavouritesFragment();
     }
 
-    public static long addFavouriteMovie(MovieModel movie) {
+    public static long addFavouriteMovie(MovieModel movie, Context context) {
 
         if (movie == null) {
             return 0;
@@ -73,7 +63,13 @@ public class FavouritesFragment extends Fragment {
         cv.put(FavouriteMoviesContract.FavouriteMovieEntry.COLUMN_RELEASE_DATE, movie.getRelease_date());
         cv.put(FavouriteMoviesContract.FavouriteMovieEntry.COLUMN_VOTE_AVERAGE, movie.getVote_average());
 
+        if (favouriteMoviesDB == null) {
+            FavouriteMoviesDbHelper favouriteMoviesDbHelper = new FavouriteMoviesDbHelper(context);
+            favouriteMoviesDB = favouriteMoviesDbHelper.getWritableDatabase();
+        }
+
         return favouriteMoviesDB.insert(FavouriteMoviesContract.FavouriteMovieEntry.TABLE_NAME, null, cv);
+
     }
 
     @Nullable

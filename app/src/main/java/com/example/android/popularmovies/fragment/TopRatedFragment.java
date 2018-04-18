@@ -17,7 +17,7 @@ import com.example.android.popularmovies.MovieActivity;
 import com.example.android.popularmovies.R;
 import com.example.android.popularmovies.adapter.MovieAdapter;
 import com.example.android.popularmovies.data.MovieModel;
-import com.example.android.popularmovies.network.JSONResponse;
+import com.example.android.popularmovies.network.MoviesJSONResponse;
 import com.example.android.popularmovies.network.RequestInterface;
 
 import java.util.ArrayList;
@@ -122,12 +122,12 @@ public class TopRatedFragment extends Fragment {
 
         RequestInterface request = retrofit.create(RequestInterface.class);
 
-        Call<JSONResponse> call = request.getTopRatedMovies();
-        call.enqueue(new Callback<JSONResponse>() {
+        Call<MoviesJSONResponse> call = request.getTopRatedMovies();
+        call.enqueue(new Callback<MoviesJSONResponse>() {
             @Override
-            public void onResponse(Call<JSONResponse> call, Response<JSONResponse> response) {
+            public void onResponse(Call<MoviesJSONResponse> call, Response<MoviesJSONResponse> response) {
 
-                JSONResponse jsonResponse = response.body();
+                MoviesJSONResponse jsonResponse = response.body();
 
                 movies = new ArrayList<>(Arrays.asList(jsonResponse.getMovies()));
                 movieAdapter = new MovieAdapter(getActivity().getApplicationContext(), movies);
@@ -135,7 +135,7 @@ public class TopRatedFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<JSONResponse> call, Throwable t) {
+            public void onFailure(Call<MoviesJSONResponse> call, Throwable t) {
                 Log.d("Error", t.getMessage());
             }
         });
