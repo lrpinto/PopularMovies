@@ -64,6 +64,9 @@ public class MovieActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getSupportActionBar().setTitle("Movie Detail");
+
         setContentView(R.layout.activity_movie);
 
         ivMoviePoster = findViewById(R.id.iv_movie);
