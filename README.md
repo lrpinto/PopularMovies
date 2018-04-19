@@ -10,7 +10,7 @@ The app launchs a movie grid displaying movie poster thumbnails.  These can be s
 # Usage
 
 - Download and then import the project with Android Studio.
-- Replace 'API_KEY' by your API key* in the file gradle.properties.java, which is located under the project root.
+- Replace 'API_KEY' by your API key* in the file gradle.properties, which is located under the project root.
 - Run the app with emulator or android device running Nexus 5 API 26 or above.
 
 # Aknowledgements
