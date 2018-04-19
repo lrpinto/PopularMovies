@@ -1,9 +1,12 @@
 package com.example.android.popularmovies;
 
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,10 +17,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.popularmovies.adapter.ReviewAdapter;
 import com.example.android.popularmovies.adapter.VideoAdapter;
 import com.example.android.popularmovies.adapter.ViewPagerAdapter;
+import com.example.android.popularmovies.data.FavouriteMoviesContract;
 import com.example.android.popularmovies.data.MovieModel;
 import com.example.android.popularmovies.data.ReviewModel;
 import com.example.android.popularmovies.data.VideoModel;
@@ -101,15 +106,27 @@ public class MovieActivity extends AppCompatActivity {
                 stars.getDrawable(0).setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
                 stars.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
 
-                btnFavourite.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        FavouritesFragment.addFavouriteMovie(movie, getApplicationContext());
-                        ViewPagerAdapter.reloadFavouriteMovies(getApplicationContext());
-                    }
-                });
-
                 loadTrailers(movie.getId());
                 loadReviews(movie.getId());
+
+            }
+        }
+    }
+
+    public void onClickAddFavouriteMovie(View view) {
+
+        Intent intentThatStartedThisActivity = getIntent();
+
+        if (intentThatStartedThisActivity != null) {
+            if (intentThatStartedThisActivity.hasExtra("MOVIE")) {
+                final MovieModel movie = intentThatStartedThisActivity.getParcelableExtra("MOVIE");
+
+                long result = addFavouriteMovie(movie);
+
+                if (result > 0) {
+                    btnFavourite.setText("MARKED AS FAVOURITE");
+                    ViewPagerAdapter.reloadFavouriteMovies(getApplicationContext());
+                }
 
             }
         }
@@ -182,5 +199,30 @@ public class MovieActivity extends AppCompatActivity {
                 Log.d("Error", t.getMessage());
             }
         });
+    }
+
+    public long addFavouriteMovie(MovieModel movie) {
+
+        if (movie == null) {
+            return 0;
+        }
+
+        ContentValues cv = new ContentValues();
+        cv.put(FavouriteMoviesContract.FavouriteMovieEntry.COLUMN_MOVIE_ID, movie.getId());
+        cv.put(FavouriteMoviesContract.FavouriteMovieEntry.COLUMN_ORIGINAL_TITLE, movie.getOriginal_title());
+        cv.put(FavouriteMoviesContract.FavouriteMovieEntry.COLUMN_POSTER_PATH, movie.getPoster_path());
+        cv.put(FavouriteMoviesContract.FavouriteMovieEntry.COLUMN_BACKDROP_PATH, movie.getBackdrop_path());
+        cv.put(FavouriteMoviesContract.FavouriteMovieEntry.COLUMN_OVERVIEW, movie.getOverview());
+        cv.put(FavouriteMoviesContract.FavouriteMovieEntry.COLUMN_RELEASE_DATE, movie.getRelease_date());
+        cv.put(FavouriteMoviesContract.FavouriteMovieEntry.COLUMN_VOTE_AVERAGE, movie.getVote_average());
+
+        Uri uri = getContentResolver().insert(FavouriteMoviesContract.FavouriteMovieEntry.CONTENT_URI, cv);
+
+        if (uri != null) {
+            Toast.makeText(getBaseContext(), "Marked as favourite successfully", Toast.LENGTH_LONG).show();
+        }
+
+        return 1;
+
     }
 }

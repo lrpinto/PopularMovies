@@ -30,7 +30,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:text="@string/btn_favourite" />
+                android:text="@string/btn_favourite"
+                android:onClick="onClickAddFavouriteMovie"/>
 
         </RelativeLayout>
 

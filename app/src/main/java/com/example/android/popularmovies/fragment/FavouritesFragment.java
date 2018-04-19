@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.android.popularmovies.MovieActivity;
 import com.example.android.popularmovies.R;
@@ -36,8 +38,6 @@ public class FavouritesFragment extends Fragment {
 
     public static final String TITLE = "Favourites";
 
-    private static SQLiteDatabase favouriteMoviesDB;
-
     private RecyclerView recyclerView;
     private ArrayList<MovieModel> movies;
     private MovieAdapter movieAdapter;
@@ -46,30 +46,6 @@ public class FavouritesFragment extends Fragment {
     public static FavouritesFragment newInstance() {
 
         return new FavouritesFragment();
-    }
-
-    public static long addFavouriteMovie(MovieModel movie, Context context) {
-
-        if (movie == null) {
-            return 0;
-        }
-
-        ContentValues cv = new ContentValues();
-        cv.put(FavouriteMoviesContract.FavouriteMovieEntry.COLUMN_MOVIE_ID, movie.getId());
-        cv.put(FavouriteMoviesContract.FavouriteMovieEntry.COLUMN_ORIGINAL_TITLE, movie.getOriginal_title());
-        cv.put(FavouriteMoviesContract.FavouriteMovieEntry.COLUMN_POSTER_PATH, movie.getPoster_path());
-        cv.put(FavouriteMoviesContract.FavouriteMovieEntry.COLUMN_BACKDROP_PATH, movie.getBackdrop_path());
-        cv.put(FavouriteMoviesContract.FavouriteMovieEntry.COLUMN_OVERVIEW, movie.getOverview());
-        cv.put(FavouriteMoviesContract.FavouriteMovieEntry.COLUMN_RELEASE_DATE, movie.getRelease_date());
-        cv.put(FavouriteMoviesContract.FavouriteMovieEntry.COLUMN_VOTE_AVERAGE, movie.getVote_average());
-
-        if (favouriteMoviesDB == null) {
-            FavouriteMoviesDbHelper favouriteMoviesDbHelper = new FavouriteMoviesDbHelper(context);
-            favouriteMoviesDB = favouriteMoviesDbHelper.getWritableDatabase();
-        }
-
-        return favouriteMoviesDB.insert(FavouriteMoviesContract.FavouriteMovieEntry.TABLE_NAME, null, cv);
-
     }
 
     @Nullable
@@ -136,8 +112,6 @@ public class FavouritesFragment extends Fragment {
     }
 
     public void loadMovies(Context context) {
-        FavouriteMoviesDbHelper favouriteMoviesDbHelper = new FavouriteMoviesDbHelper(context);
-        favouriteMoviesDB = favouriteMoviesDbHelper.getWritableDatabase();
 
         movies = new ArrayList<>();
         try (Cursor cursor = getAllFavouriteMovies()) {
@@ -187,15 +161,11 @@ public class FavouritesFragment extends Fragment {
 
     private Cursor getAllFavouriteMovies() {
 
-        return favouriteMoviesDB.query(
-                FavouriteMoviesContract.FavouriteMovieEntry.TABLE_NAME,
+        return getActivity().getContentResolver().query(FavouriteMoviesContract.FavouriteMovieEntry.CONTENT_URI,
                 null,
                 null,
                 null,
-                null,
-                null,
-                FavouriteMoviesContract.FavouriteMovieEntry.COLUMN_VOTE_AVERAGE
-        );
+                FavouriteMoviesContract.FavouriteMovieEntry.COLUMN_VOTE_AVERAGE);
     }
 
 }

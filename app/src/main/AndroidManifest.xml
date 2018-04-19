@@ -23,6 +23,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".MovieActivity" />
+
+        <provider
+            android:name = "com.example.android.popularmovies.data.FavouriteMoviesContentProvider"
+            android:authorities = "com.example.android.popularmovies"
+            android:exported= "false" />
+
     </application>
 
 </manifest>
