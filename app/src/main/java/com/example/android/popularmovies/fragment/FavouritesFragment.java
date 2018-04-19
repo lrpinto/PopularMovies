@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.example.android.popularmovies.MovieActivity;
 import com.example.android.popularmovies.R;
 import com.example.android.popularmovies.adapter.MovieAdapter;
+import com.example.android.popularmovies.adapter.ViewPagerAdapter;
 import com.example.android.popularmovies.data.FavouriteMoviesContract;
 import com.example.android.popularmovies.data.FavouriteMoviesDbHelper;
 import com.example.android.popularmovies.data.MovieModel;
@@ -109,6 +111,71 @@ public class FavouritesFragment extends Fragment {
             }
         });
 
+
+        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            final GestureDetector gestureDetector = new GestureDetector(getActivity().getApplicationContext(), new GestureDetector.SimpleOnGestureListener() {
+
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+                    return true;
+                }
+
+            });
+
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+
+                View child = rv.findChildViewUnder(e.getX(), e.getY());
+                if (child != null && gestureDetector.onTouchEvent(e)) {
+                    int position = rv.getChildAdapterPosition(child);
+
+                    MovieModel movie = movies.get(position);
+
+                    Intent intentToStartDetailActivity = new Intent(getActivity().getApplicationContext(), MovieActivity.class);
+                    intentToStartDetailActivity.putExtra("MOVIE", movie);
+
+                    startActivity(intentToStartDetailActivity);
+
+                }
+
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+                // do nothing
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+                // do nothing
+            }
+        });
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+
+                int position = viewHolder.getAdapterPosition();
+
+                MovieModel movie = movies.get(position);
+
+                Uri movieUri = FavouriteMoviesContract.FavouriteMovieEntry.CONTENT_URI.buildUpon().appendEncodedPath("/" + movie.getId() ).build();
+
+                int rowsDeleted = getActivity().getContentResolver().delete(movieUri, null, null);
+
+                if (rowsDeleted > 0) {
+                    Toast.makeText(getActivity().getBaseContext(), "Removed from favourites successfully", Toast.LENGTH_LONG).show();
+                    ViewPagerAdapter.reloadFavouriteMovies(getContext());
+                }
+
+            }
+        }).attachToRecyclerView(recyclerView);
     }
 
     public void loadMovies(Context context) {

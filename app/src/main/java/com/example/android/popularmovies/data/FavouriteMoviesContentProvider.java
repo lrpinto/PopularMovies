@@ -59,6 +59,23 @@ public class FavouriteMoviesContentProvider extends ContentProvider {
                         FavouriteMoviesContract.FavouriteMovieEntry.COLUMN_VOTE_AVERAGE
                 );
                 break;
+            case FAVOURITE_MOVIES_WITH_ID:
+
+                String movieId = uri.getPathSegments().get(1);
+
+                String mSelection = FavouriteMoviesContract.FavouriteMovieEntry.COLUMN_MOVIE_ID + "=?";
+                String[] mSelectionArgs = new String[]{movieId};
+
+                returnCursor = favouriteMoviesDB.query(
+                        FavouriteMoviesContract.FavouriteMovieEntry.TABLE_NAME,
+                        null,
+                        mSelection,
+                        mSelectionArgs,
+                        null,
+                        null,
+                        FavouriteMoviesContract.FavouriteMovieEntry.COLUMN_VOTE_AVERAGE
+                );
+                break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -104,11 +121,41 @@ public class FavouriteMoviesContentProvider extends ContentProvider {
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+
+        final SQLiteDatabase favouriteMoviesDB = favouriteMoviesDbHelper.getWritableDatabase();
+
+        int match = sUriMatcher.match(uri);
+
+        int moviesDeleted;
+
+        switch (match) {
+            case FAVOURITE_MOVIES_WITH_ID:
+
+                String movieId = uri.getPathSegments().get(1);
+
+                String mSelection = FavouriteMoviesContract.FavouriteMovieEntry.COLUMN_MOVIE_ID + "=?";
+                String[] mSelectionArgs = new String[]{movieId};
+
+                moviesDeleted = favouriteMoviesDB.delete(
+                        FavouriteMoviesContract.FavouriteMovieEntry.TABLE_NAME,
+                        mSelection,
+                        mSelectionArgs
+                        );
+                break;
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+
+        if (moviesDeleted != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+
+        return moviesDeleted;
     }
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues contentValues, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+
+        throw new UnsupportedOperationException("Update favourite movies is not supported");
     }
 }

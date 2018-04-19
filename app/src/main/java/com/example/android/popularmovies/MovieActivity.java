@@ -3,6 +3,7 @@ package com.example.android.popularmovies;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
@@ -96,6 +97,12 @@ public class MovieActivity extends AppCompatActivity {
                         .load("http://image.tmdb.org/t/p/" + "w300" + movie.getBackdrop_path())
                         .into(ivMoviePoster);
 
+               if ( isFavoriteMovie( movie ) ) {
+                   btnFavourite.setText("UNMARK AS FAVOURITE");
+               } else {
+                   btnFavourite.setText("MARK AS FAVOURITE");
+               }
+
                 tvOriginalTitle.setText(movie.getOriginal_title());
                 tvReleaseDate.setText(movie.getRelease_date());
                 tvVoteAverage.setText(String.valueOf(movie.getVote_average()));
@@ -113,7 +120,20 @@ public class MovieActivity extends AppCompatActivity {
         }
     }
 
-    public void onClickAddFavouriteMovie(View view) {
+    private boolean isFavoriteMovie(MovieModel movie) {
+
+        Uri movieUri = FavouriteMoviesContract.FavouriteMovieEntry.CONTENT_URI.buildUpon().appendEncodedPath("/" + movie.getId() ).build();
+
+        int rowsReturned = getContentResolver().query(movieUri,
+                null,
+                null,
+                null,
+                FavouriteMoviesContract.FavouriteMovieEntry.COLUMN_VOTE_AVERAGE).getCount();
+
+        return rowsReturned > 0;
+    }
+
+    public void onClickUpdateFavouriteMovies(View view) {
 
         Intent intentThatStartedThisActivity = getIntent();
 
@@ -121,15 +141,40 @@ public class MovieActivity extends AppCompatActivity {
             if (intentThatStartedThisActivity.hasExtra("MOVIE")) {
                 final MovieModel movie = intentThatStartedThisActivity.getParcelableExtra("MOVIE");
 
-                long result = addFavouriteMovie(movie);
+                if ( isFavoriteMovie(movie) ) {
+                    long result = deleteFavouriteMovie(movie);
 
-                if (result > 0) {
-                    btnFavourite.setText("MARKED AS FAVOURITE");
-                    ViewPagerAdapter.reloadFavouriteMovies(getApplicationContext());
+                    if (result > 0) {
+                        btnFavourite.setText("MARK AS FAVOURITE");
+                        ViewPagerAdapter.reloadFavouriteMovies(getApplicationContext());
+                    }
+                } else {
+                    long result = addFavouriteMovie(movie);
+
+                    if (result > 0) {
+                        btnFavourite.setText("UNMARK AS FAVOURITE");
+                        ViewPagerAdapter.reloadFavouriteMovies(getApplicationContext());
+                    }
                 }
-
             }
         }
+    }
+
+    private long deleteFavouriteMovie(MovieModel movie) {
+
+        if (movie == null) {
+            return 0;
+        }
+
+        Uri movieUri = FavouriteMoviesContract.FavouriteMovieEntry.CONTENT_URI.buildUpon().appendEncodedPath("/" + movie.getId() ).build();
+
+        int rowsDeleted = getContentResolver().delete(movieUri, null, null);
+
+        if (rowsDeleted > 0) {
+            Toast.makeText(getBaseContext(), "Unmarked as favourite successfully", Toast.LENGTH_LONG).show();
+        }
+
+        return rowsDeleted;
     }
 
     private void loadTrailers(Integer movieId) {

@@ -24,5 +24,8 @@ public class FavouriteMoviesContract {
         public static final String COLUMN_RELEASE_DATE = "releaseDate"; // The release date
         public static final String COLUMN_OVERVIEW = "overview"; // The plot synopsis
         public static final String COLUMN_VOTE_AVERAGE = "voteAverage"; // The user rating
+
+        public class CONTENT_URI_WITH_MOVIE_ID {
+        }
     }
 }
