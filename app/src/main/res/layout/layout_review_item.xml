@@ -12,7 +12,9 @@
         android:text="@string/btn_read"
         android:textColor="@android:color/white"
         android:textSize="14sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:background="@color/orange"
+        android:layout_margin="4dp" />
 
     <TextView
         android:id="@+id/tv_blob"

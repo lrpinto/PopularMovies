@@ -99,8 +99,12 @@ public class MovieActivity extends AppCompatActivity {
 
                if ( isFavoriteMovie( movie ) ) {
                    btnFavourite.setText("UNMARK AS FAVOURITE");
+                   btnFavourite.setBackgroundColor( getResources().getColor(R.color.red, null) );
+                   btnFavourite.setTextColor(getResources().getColor(R.color.white, null));
                } else {
                    btnFavourite.setText("MARK AS FAVOURITE");
+                   btnFavourite.setBackgroundColor( getResources().getColor(R.color.yellow, null) );
+                   btnFavourite.setTextColor(getResources().getColor(R.color.black, null));
                }
 
                 tvOriginalTitle.setText(movie.getOriginal_title());
@@ -146,6 +150,8 @@ public class MovieActivity extends AppCompatActivity {
 
                     if (result > 0) {
                         btnFavourite.setText("MARK AS FAVOURITE");
+                        btnFavourite.setBackgroundColor( getResources().getColor(R.color.yellow, null) );
+                        btnFavourite.setTextColor(getResources().getColor(R.color.black, null));
                         ViewPagerAdapter.reloadFavouriteMovies(getApplicationContext());
                     }
                 } else {
@@ -153,6 +159,8 @@ public class MovieActivity extends AppCompatActivity {
 
                     if (result > 0) {
                         btnFavourite.setText("UNMARK AS FAVOURITE");
+                        btnFavourite.setBackgroundColor( getResources().getColor(R.color.red, null) );
+                        btnFavourite.setTextColor(getResources().getColor(R.color.white, null));
                         ViewPagerAdapter.reloadFavouriteMovies(getApplicationContext());
                     }
                 }

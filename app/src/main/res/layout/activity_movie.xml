@@ -22,7 +22,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:contentDescription="@string/poster_cd" />
+                android:contentDescription="@string/poster_cd"
+                android:layout_marginTop = "8dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft = "8dp"
+                android:layout_marginRight = "8dp" />
 
             <Button
                 android:id="@+id/btn_favourite"
@@ -30,7 +34,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:onClick="onClickUpdateFavouriteMovies"/>
+                android:paddingHorizontal="4dp"
+                android:onClick="onClickUpdateFavouriteMovies"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp" />
 
         </RelativeLayout>
 
@@ -128,6 +135,18 @@
             android:paddingBottom="8dp"
             android:paddingTop="8dp" />
 
+        <TextView
+            android:id="@+id/tv_trailers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="8dp"
+            android:paddingStart="4dp"
+            android:paddingTop="8dp"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:text="Trailers:"
+            android:textStyle="bold" />
+
         <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/card_recycler_view_videos"
             android:layout_width="match_parent"
@@ -141,6 +160,18 @@
             android:background="?android:attr/listDivider"
             android:paddingBottom="8dp"
             android:paddingTop="8dp" />
+
+        <TextView
+            android:id="@+id/tv_reviews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="8dp"
+            android:paddingStart="4dp"
+            android:paddingTop="8dp"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:text="Reviews:"
+            android:textStyle="bold" />
 
         <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/card_recycler_view_reviews"

@@ -12,7 +12,9 @@
         android:textColor="@android:color/white"
         android:layout_marginTop="8dp"
         android:textSize="14sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:background="@color/green"
+        android:layout_margin="4dp" />
 
     <TextView
         android:id="@+id/tv_name"
